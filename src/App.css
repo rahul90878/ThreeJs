@@ -1,0 +1,47 @@
+.app-container {
+  background: url('../src/assets/bg.jpg') center scroll;
+  --end-position: 100%;
+  --mid-position: 50%; /* Set mid-position for reference */
+}
+
+.text-animation {
+  font-size: 24px;
+  position: relative; /* Use absolute positioning for proper animation */
+  color: rgb(175, 48, 48);
+  animation: moveText linear infinite; /* Infinite animation */
+}
+
+.paused-0 {
+  animation-play-state: paused; /* Pause the animation */
+}
+.paused-1 {
+  animation-play-state: paused; /* Pause the animation */
+}
+.paused-2 {
+  animation-play-state: paused; /* Pause the animation */
+}
+
+@keyframes moveText {
+  0% {
+    /* transform:translateX(-100%); */
+    left: 0; 
+  }
+  100% {
+    /* transform:translateX(100%); */
+    left: var(--end-position);
+  }
+}
+
+/* Button Styling */
+.controls button {
+  margin: 5px;
+  padding: 10px;
+  background-color: #333;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.controls button:hover {
+  background-color: #555;
+}
