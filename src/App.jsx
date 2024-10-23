@@ -214,10 +214,10 @@ function App() {
  
 
   return (
-    <div className="bg-gray-100 h-screen flex flex-wrap md:flex-col items-center justify-center">
+    <div className="bg-gray-100 md:h-screen flex flex-wrap md:flex-col items-center justify-center">
       <div
         ref={containerRef}
-        className="md:w-1/2 my-5 h-52 w-full py-4 rounded-xl shadow-lg relative md:overflow-hidden app-container"
+        className="md:w-1/2 my-5 h-52 w-full py-4 rounded-xl shadow-lg relative overflow-hidden app-container"
       >
         <p
           className={`text-animation whitespace-nowrap ${animationSettings.paused ? 'paused-0' : ''}`}
