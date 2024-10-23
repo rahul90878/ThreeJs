@@ -214,10 +214,10 @@ function App() {
  
 
   return (
-    <div className="bg-gray-100 h-screen flex flex-col items-center justify-center">
+    <div className="bg-gray-100 h-screen flex flex-wrap md:flex-col items-center justify-center">
       <div
         ref={containerRef}
-        className="w-1/2 my-5 h-52 py-4 rounded-xl shadow-lg relative overflow-hidden app-container"
+        className="md:w-1/2 my-5 h-52 w-full py-4 rounded-xl shadow-lg relative md:overflow-hidden app-container"
       >
         <p
           className={`text-animation whitespace-nowrap ${animationSettings.paused ? 'paused-0' : ''}`}
@@ -254,7 +254,7 @@ function App() {
         </p>
       </div>
 
-      <div className="controls w-1/2 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3  bg-white shadow-lg rounded-lg  p-4 space-y-4">
+      <div className="controls md:w-1/2 w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3  bg-white shadow-lg rounded-lg  p-4 space-y-4">
         <div className="col-span-1">
           <div className=''>
             <label className="block font-semibold">Set Speed (seconds):</label>
