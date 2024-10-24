@@ -1,59 +1,35 @@
 .app-container {
   background: url('../src/assets/bg.jpg') center scroll;
   --end-position: 100%;
-  --mid-position: 50%; /* Set mid-position for reference */
 }
+/* .app-container {
+  position: relative;
+  width: 100%;
+  height: 100px;
+  overflow: hidden;
+} */
 
-.text-animation {
-  font-size: 24px;
-  position: relative; /* Use absolute positioning for proper animation */
-  color: rgb(175, 48, 48);
-  animation: moveText linear  infinite ; /* Infinite animation */
-}
-.text-animation1 {
-  font-size: 24px;
-  position: relative; /* Use absolute positioning for proper animation */
-  color: rgb(175, 48, 48);
-  animation: moveText linear infinite; /* Infinite animation */
-}
+.text-animation,
+.text-animation1,
 .text-animation2 {
-  font-size: 24px;
-  position: relative; /* Use absolute positioning for proper animation */
-  color: rgb(175, 48, 48);
-  animation: moveText linear infinite; /* Infinite animation */
+  position: relative;
+  left:0; /* Start outside of the visible area */
+
+  font-size: 20px;
+ 
 }
 
-.paused-0 {
-  animation-play-state: paused; /* Pause the animation */
-}
-.paused-1 {
-  animation-play-state: paused; /* Pause the animation */
-}
-.paused-2 {
-  animation-play-state: paused; /* Pause the animation */
+.animate {
+  animation: slide var(--duration, 4s) linear 1 forwards var(--delay, 0s);
 }
 
-@keyframes moveText {
+@keyframes slide {
   0% {
-    /* transform:translateX(-100%); */
-    left: 0; 
+    left: 0;
+    transform: translateX(0); /* Start from the initial position */
   }
   100% {
-    /* transform:translateX(100%); */
-    left: var(--end-position);
+    /* transform: translateX(50%); */
+    left: var(--end-position) ;
   }
-}
-
-/* Button Styling */
-.controls button {
-  margin: 5px;
-  padding: 10px;
-  background-color: #333;
-  color: white;
-  border: none;
-  cursor: pointer;
-}
-
-.controls button:hover {
-  background-color: #555;
 }
