@@ -8,6 +8,18 @@
   font-size: 24px;
   position: relative; /* Use absolute positioning for proper animation */
   color: rgb(175, 48, 48);
+  animation: moveText linear  infinite ; /* Infinite animation */
+}
+.text-animation1 {
+  font-size: 24px;
+  position: relative; /* Use absolute positioning for proper animation */
+  color: rgb(175, 48, 48);
+  animation: moveText linear infinite; /* Infinite animation */
+}
+.text-animation2 {
+  font-size: 24px;
+  position: relative; /* Use absolute positioning for proper animation */
+  color: rgb(175, 48, 48);
   animation: moveText linear infinite; /* Infinite animation */
 }
 

@@ -11,7 +11,7 @@ function App() {
     stopMid: false,   // Flag to indicate if we want to stop at the middle
   });
   const [animationSettings1, setAnimationSettings1] = useState({
-    speed: 6,        // Default speed is 4s
+    speed: 6,        // Default speed is 6s
     delay: 0,        // Default delay is 0s
     paused: false,
     startPosition: 0, // Start position in percentage
@@ -19,7 +19,7 @@ function App() {
     stopMid: false,   // Flag to indicate if we want to stop at the middle
   });
   const [animationSettings2, setAnimationSettings2] = useState({
-    speed: 2,        // Default speed is 4s
+    speed: 2,        // Default speed is 2s
     delay: 0,        // Default delay is 0s
     paused: false,
     startPosition: 0, // Start position in percentage
@@ -31,7 +31,11 @@ function App() {
   const containerRef = useRef(null); // Reference for the container
   const textRef1 = useRef(null);
   const textRef2 = useRef(null);
- 
+
+  // Update animation key based on delay value to force reload when delay changes
+  const animationKey = `animation-${animationSettings.delay}`;
+  const animationKey1 = `animation1-${animationSettings1.delay}`;
+  const animationKey2 = `animation2-${animationSettings2.delay}`;
 
   const handleInputChange = (field) => (event) => {
     const value = Number(event.target.value);
@@ -99,120 +103,6 @@ function App() {
     }));
   };
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      if (!animationSettings.paused && containerRef.current) {
-        const containerWidth = containerRef.current?.offsetWidth;
-  
-        // Calculate current position in percentage with two decimal precision
-        const currentPos = Number(parseFloat((textRef.current?.offsetLeft / containerWidth) * 100).toFixed(2));
-        
-        // Calculate midpoint in percentage
-        const midWidth = Number(parseFloat(animationSettings.endPosition/2).toFixed(2)); // Midpoint in percentage
-        
-        // console.log(
-        //   currentPos < midWidth + 2 && currentPos > midWidth - 2,
-        //   midWidth + 2,
-        //   midWidth - 2,
-        //   containerWidth,
-        //   currentPos,
-        //   midWidth
-        // );
-  
-        if (animationSettings.stopMid) {
-          // If we want to stop at the middle
-          const tolerance = 2; // Allow for a small range of tolerance
-          if (currentPos >= midWidth - tolerance && currentPos <= midWidth + tolerance) {
-            // Pause the animation when within tolerance range of the midpoint
-            setAnimationSettings((prev) => ({
-              ...prev,
-              paused: true,
-            }));
-          }
-        }
-      }
-    }, 100); // Update position every 100ms
-  
-    return () => clearInterval(interval); // Cleanup the interval on component unmount
-  }, [animationSettings]);
-  
-  useEffect(() => {
-    const interval = setInterval(() => {
-      if (!animationSettings1.paused && containerRef.current) {
-        const containerWidth = containerRef.current?.offsetWidth;
-  
-        // Calculate current position in percentage with two decimal precision
-        const currentPos = Number(parseFloat((textRef1.current?.offsetLeft / containerWidth) * 100).toFixed(2));
-        
-        // Calculate midpoint in percentage
-        const midWidth = Number(parseFloat(animationSettings1.endPosition/2).toFixed(2)); // Midpoint in percentage
-        
-        console.log(
-          currentPos < midWidth + 2 && currentPos > midWidth - 2,
-          midWidth + 2,
-          midWidth - 2,
-          containerWidth,
-          currentPos,
-          midWidth
-        );
-  
-        if (animationSettings1.stopMid) {
-          // If we want to stop at the middle
-          const tolerance = 2; // Allow for a small range of tolerance
-          if (currentPos >= midWidth - tolerance && currentPos <= midWidth + tolerance) {
-            // Pause the animation when within tolerance range of the midpoint
-            setAnimationSettings1((prev) => ({
-              ...prev,
-              paused: true,
-            }));
-          }
-        }
-      }
-    }, 100); // Update position every 100ms
-  
-    return () => clearInterval(interval); // Cleanup the interval on component unmount
-  }, [animationSettings1]);
-  
-  useEffect(() => {
-    const interval = setInterval(() => {
-      if (!animationSettings2.paused && containerRef.current) {
-        const containerWidth = containerRef.current?.offsetWidth;
-  
-        // Calculate current position in percentage with two decimal precision
-        const currentPos = Number(parseFloat((textRef2.current?.offsetLeft / containerWidth) * 100).toFixed(2));
-        
-        // Calculate midpoint in percentage
-        const midWidth = Number(parseFloat((animationSettings2.endPosition / 2 )).toFixed(2)); // Midpoint in percentage
-        
-        // console.log(
-        //   currentPos < midWidth + 2 && currentPos > midWidth - 2,
-        //   midWidth + 2,
-        //   midWidth - 2,
-        //   containerWidth,
-        //   currentPos,
-        //   midWidth
-        // );
-  
-        if (animationSettings2.stopMid) {
-          // If we want to stop at the middle
-          const tolerance = 2; // Allow for a small range of tolerance
-          if (currentPos >= midWidth - tolerance && currentPos <= midWidth + tolerance) {
-            // Pause the animation when within tolerance range of the midpoint
-            setAnimationSettings2((prev) => ({
-              ...prev,
-              paused: true,
-            }));
-          }
-        }
-      }
-    }, 100); // Update position every 100ms
-  
-    return () => clearInterval(interval); // Cleanup the interval on component unmount
-  }, [animationSettings2]);
-  
-  
- 
-
   return (
     <div className="bg-gray-100 md:h-screen flex flex-wrap md:flex-col items-center justify-center">
       <div
@@ -220,43 +110,46 @@ function App() {
         className="md:w-1/2 my-5 h-52 w-full py-4 rounded-xl shadow-lg relative overflow-hidden app-container"
       >
         <p
+          key={animationKey}  // Update key when delay changes
           className={`text-animation whitespace-nowrap ${animationSettings.paused ? 'paused-0' : ''}`}
           style={{
             '--end-position': `${animationSettings.endPosition}%`,
             animationDuration: `${animationSettings.speed}s`,
-            left: `${animationSettings.startPosition}%`,
+            animationDelay: `${animationSettings.delay}s`,
           }}
           ref={textRef}
         >
           Animation 1
         </p>
         <p
-          className={`text-animation text-yellow-500 whitespace-nowrap ${animationSettings1.paused ? 'paused-1' : ''}`}
+          key={animationKey1}  // Update key when delay changes
+          className={`text-animation1 text-yellow-500 whitespace-nowrap ${animationSettings1.paused ? 'paused-1' : ''}`}
           style={{
             '--end-position': `${animationSettings1.endPosition}%`,
             animationDuration: `${animationSettings1.speed}s`,
-            left: `${animationSettings1.startPosition}%`,
+            animationDelay: `${animationSettings1.delay}s`,
           }}
           ref={textRef1}
         >
          Animation 2
         </p>
         <p
-          className={`text-animation text-green-700 whitespace-nowrap ${animationSettings2.paused ? 'paused-2' : ''}`}
+          key={animationKey2}  // Update key when delay changes
+          className={`text-animation2 text-green-700 whitespace-nowrap ${animationSettings2.paused ? 'paused-2' : ''}`}
           style={{
             '--end-position': `${animationSettings2.endPosition}%`,
             animationDuration: `${animationSettings2.speed}s`,
-            left: `${animationSettings2.startPosition}%`,
+            animationDelay: `${animationSettings2.delay}s`,
           }}
           ref={textRef2}
         >
-       Animation 3
+          Animation 3
         </p>
       </div>
 
       <div className="controls md:w-1/2 w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3  bg-white shadow-lg rounded-lg  p-4 space-y-4">
         <div className="col-span-1">
-          <div className=''>
+          <div>
             <label className="block font-semibold">Set Speed (seconds):</label>
             <input
               type="number"
@@ -267,8 +160,7 @@ function App() {
             />
           </div>
 
-          {/* Delay */}
-          {/* <div>
+          <div>
             <label className="block font-semibold">Set Delay (seconds):</label>
             <input
               type="number"
@@ -277,7 +169,8 @@ function App() {
               className="border border-gray-300 rounded p-2 w-full"
               onChange={handleInputChange('delay')}
             />
-          </div> */}
+          </div>
+
           <div>
             <label className="block font-semibold">End Position (%):</label>
             <input
@@ -301,8 +194,8 @@ function App() {
           >
             {animationSettings.stopMid ? 'Continue' : 'Stop Mid'}
           </button>
-
         </div>
+
         <div className="col-span-1">
           <div className=''>
             <label className="block font-semibold">Set Speed (seconds):</label>
@@ -315,7 +208,7 @@ function App() {
             />
           </div>
           {/* Delay */}
-          {/* <div>
+          <div>
             <label className="block font-semibold">Set Delay (seconds):</label>
             <input
               type="number"
@@ -324,7 +217,7 @@ function App() {
               className="border border-gray-300 rounded p-2 w-full"
               onChange={handleInputChange2('delay')}
             />
-          </div> */}
+          </div>
           <div>
             <label className="block font-semibold">End Position (%):</label>
             <input
@@ -362,7 +255,7 @@ function App() {
             />
           </div>
           {/* delay */}
-          {/* <div>
+          <div>
             <label className="block font-semibold">Set Delay (seconds):</label>
             <input
               type="number"
@@ -371,7 +264,7 @@ function App() {
               className="border border-gray-300 rounded p-2 w-full"
               onChange={handleInputChange3('delay')}
             />
-          </div> */}
+          </div>
           <div>
             <label className="block font-semibold">End Position (%):</label>
             <input
