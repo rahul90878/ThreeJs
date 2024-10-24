@@ -267,7 +267,10 @@ function App() {
           onClick={startAnimation}
           className="bg-blue-500 text-white py-2 rounded hover:bg-blue-600 transition duration-200 w-full"
         >
-          Start Animation
+        {
+          isAnimating?"Running": "Start Animation"
+        }
+         
         </button>
       </div>
     </div>
