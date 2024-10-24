@@ -15,14 +15,14 @@ function App() {
     delay: 0,
     startPosition: 0,
     endPosition: 100,
-    text:"Animation 1 Lorem, ipsum dolor."
+    text:"Animation 1"
   });
   const [animationSettings1, setAnimationSettings1] = useState({
     speed: 6,
     delay: 0,
     startPosition: 0,
     endPosition: 100,
-    text:"  Animation 2"
+    text:"Animation 2"
   });
   const [animationSettings2, setAnimationSettings2] = useState({
     speed: 2,
@@ -36,8 +36,8 @@ function App() {
 
   const startAnimation = () => {
     setIsAnimating(!isAnimating);
-    setIsAnimating1(!isAnimating1);
-    setIsAnimating2(!isAnimating2);
+    setIsAnimating1(false);
+    setIsAnimating2(false);
 
   };
  
@@ -106,7 +106,7 @@ function App() {
   
       
         }
-      }, 500);
+      }, 100);
     }
   
     // Cleanup function to clear the interval when the component unmounts or when isAnimating changes
