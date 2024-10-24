@@ -36,6 +36,9 @@ function App() {
 
   const startAnimation = () => {
     setIsAnimating(!isAnimating);
+    setIsAnimating1(!isAnimating1);
+    setIsAnimating2(!isAnimating2);
+
   };
  
 
