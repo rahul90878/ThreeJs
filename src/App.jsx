@@ -35,6 +35,9 @@ function App() {
 
   const handleInputChange = (field) => (event) => {
     const value = Number(event.target.value);
+    isAnimatingRef.current = false;
+    isAnimating1Ref.current = false;
+    isAnimating2Ref.current = false;
     setAnimationSettings((prev) => ({
       ...prev,
       [field]: value >= 0 ? value : prev[field],
@@ -43,6 +46,9 @@ function App() {
 
   const handleInputChange2 = (field) => (event) => {
     const value = Number(event.target.value);
+    isAnimatingRef.current = false;
+    isAnimating1Ref.current = false;
+    isAnimating2Ref.current = false;
     setAnimationSettings1((prev) => ({
       ...prev,
       [field]: value >= 0 ? value : prev[field],
@@ -51,6 +57,9 @@ function App() {
 
   const handleInputChange3 = (field) => (event) => {
     const value = Number(event.target.value);
+    isAnimatingRef.current = false;
+    isAnimating1Ref.current = false;
+    isAnimating2Ref.current = false;
     setAnimationSettings2((prev) => ({
       ...prev,
       [field]: value >= 0 ? value : prev[field],
