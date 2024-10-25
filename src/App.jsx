@@ -140,7 +140,7 @@ function App() {
       animationFrameId = requestAnimationFrame(draw);
     };
 
-   
+  //  if(isAnimating)
       animationFrameId = requestAnimationFrame(draw);
     
 
