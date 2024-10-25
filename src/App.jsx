@@ -67,7 +67,7 @@ function App() {
   };
 
   const startAnimation = () => {
-    setIsAnimating(!isAnimating);
+    setIsAnimating(true);
     isAnimatingRef.current = true;
     isAnimating1Ref.current = false;
     isAnimating2Ref.current = false;
@@ -143,6 +143,12 @@ function App() {
 
         if (startX2 < endX2 - getTextWidth(ctx, animationSettings2.text)) {
           startX2 += animationSettings2.speed;
+        }
+        else{
+          setIsAnimating(false);
+          isAnimatingRef.current = false;
+          isAnimating1Ref.current = false; // Move to next animation
+          isAnimating2Ref.current = false; // Move to next animation
         }
       }
 
@@ -255,7 +261,7 @@ function App() {
             onClick={startAnimation}
             className="bg-blue-500 text-white py-2 rounded hover:bg-blue-600 transition duration-200 w-full"
           >
-            {"Start Animation"}
+            {isAnimating?"Running":"Start Animation"}
           </button>
         </div>
       </div>
